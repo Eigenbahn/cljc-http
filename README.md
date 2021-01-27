@@ -28,7 +28,7 @@ Cancelling requests is possible with `cljc-http.core/abort!`, modeled around `cl
 ;; (clj-only as `async/<!!` not available in cljs)
 (let [resp (async/<!! (http-client/get "http://http://example.com/resource" {:accept :json}))
       http-status (:status resp)]
-  (when (http-client/unexceptional-status? http-status)
+  (when-not (http-client/unexceptional-status? http-status)
     (throw (ex-info "Unexpected HTTP response code" {:ex-type ::unexpected-http-status,
                                                      :input http-status})))
   ;; ... do stuff w/ (:body resp)
@@ -38,7 +38,7 @@ Cancelling requests is possible with `cljc-http.core/abort!`, modeled around `cl
 (go
   (let [resp (async/<! (http-client/get "http://http://example.com/resource" {:accept :json}))
         http-status (:status resp)]
-    (when (http-client/unexceptional-status? http-status)
+    (when-not (http-client/unexceptional-status? http-status)
       (throw (ex-info "Unexpected HTTP response code" {:ex-type ::unexpected-http-status,
                                                        :input http-status})))
     ;; ... do stuff w/ (:body resp)
