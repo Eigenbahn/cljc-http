@@ -2,7 +2,7 @@
 
 A naive attempt at making a cljc wrapper around the well-known [clj-http](https://github.com/dakrone/clj-http) and [cljs-http](https://github.com/r0man/cljs-http) libs.
 
-For a more production-ready library, see [httpurr](https://github.com/funcool/httpurr) ([doc](https://funcool.github.io/httpurr/latest/)).
+For a more production-ready libraries, see [httpurr](https://github.com/funcool/httpurr) ([doc](https://funcool.github.io/httpurr/latest/)) and [cljs-ajax](https://github.com/JulianBirch/cljs-ajax).
 
 The main trick is to make clj-http calls be always async and returning a core.async channel, as per cljs-http conventions.
 
