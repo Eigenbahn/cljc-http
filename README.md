@@ -8,7 +8,7 @@ The main trick is to make clj-http calls be always async and returning a core.as
 
 In case of errors, a response object is returned, as per cljs-http conventions. That means that for clj, we convert the thrown [slingshot stone](https://github.com/scgilardi/slingshot) (i.e. Exception) back to a response object.
 
-Cancelling requests is possible with `cljc-http.core/abort!`, modeled around `cljs-http.core/abort!`. Note that standard clj-http also supports [cancelling async requests](https://github.com/dakrone/clj-http#cancelling-requests) by cancelling the future (promise object) holding its job.
+Cancelling requests is possible with `cljc-http.core/abort!`, modeled around `cljs-http.core/abort!`. Note that standard clj-http also supports [cancelling async requests](https://github.com/dakrone/clj-http#cancelling-requests) by cancelling the future object holding its job.
 
 
 
