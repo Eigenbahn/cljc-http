@@ -46,14 +46,17 @@ Cancelling requests is possible with `cljc-http.core/abort!`, modeled around `cl
 ;; canceling sync request (clj-only as `async/alts!!` not avialable in cljs)
 (let [request-channel (http-client/get "http://http://example.com/resource" {:accept :json})
       [resp alts-chan] (async/alts!! [request-channel (async/timeout 1000)])]
-  (when (nil? resp)
-    (http-core/abort! request-channel)))
+  (when (nil? resp)                     ; got timeout
+    (http-core/abort! request-channel))
+
+  ;; ... do stuff w/ resp
+  )
 
 ;; canceling async request
 (go
   (let [request-channel (http-client/get "http://http://example.com/resource" {:accept :json})
         [resp alts-chan] (async/alts! [request-channel (async/timeout 1000)])]
-    (when (nil? resp)
+    (when (nil? resp)                   ; got timeout
       (http-core/abort! request-channel))
 
     ;; ... do stuff w/ resp
